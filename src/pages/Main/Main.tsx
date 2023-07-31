@@ -1,13 +1,15 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 import { Header } from "src/containers";
 
 import { Wrapper } from "./styles";
 
 const Main: FC = () => {
+  const [noOfItems, setNoOfItems] = useState<number>(0);
+
   return (
     <Wrapper>
-      <Header />
+      <Header noOfItems={noOfItems} />
     </Wrapper>
   );
 };
