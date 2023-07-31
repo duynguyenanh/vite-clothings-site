@@ -1,5 +1,7 @@
 import React, { FC } from "react";
 
+import { ProductCart } from "src/types";
+
 import {
   Wrapper,
   ImageWrapper,
@@ -8,16 +10,20 @@ import {
   BoldText,
 } from "./styles";
 
-const CartItem: FC = () => {
+interface IProps {
+  cartItem: ProductCart;
+}
+
+const CartItem: FC<IProps> = ({ cartItem }) => {
   return (
     <Wrapper>
       <ImageWrapper src="https://mrdevelopertestassets.s3.ap-southeast-2.amazonaws.com/classic-tee.jpg" />
       <ContentWrapper>
-        <NormalText>Classic Tee</NormalText>
+        <NormalText>{cartItem.title}</NormalText>
         <NormalText>
-          1 x <BoldText>$75.00</BoldText>
+          {cartItem.quantity} x <BoldText>${cartItem.unitPrice}</BoldText>
         </NormalText>
-        <NormalText>Size:L</NormalText>
+        <NormalText>Size:{cartItem.size.label}</NormalText>
       </ContentWrapper>
     </Wrapper>
   );

@@ -9,6 +9,7 @@ interface IProps {
   borderColor: string;
   withHover?: boolean;
   isActive?: boolean;
+  onClick: () => void;
 }
 
 const Button: FC<IProps> = ({
@@ -18,6 +19,7 @@ const Button: FC<IProps> = ({
   borderColor,
   withHover = false,
   isActive = false,
+  onClick,
 }) => {
   return (
     <Wrapper
@@ -26,6 +28,7 @@ const Button: FC<IProps> = ({
       borderColor={borderColor}
       withHover={withHover}
       isActive={isActive}
+      onClick={onClick}
     >
       {text}
     </Wrapper>

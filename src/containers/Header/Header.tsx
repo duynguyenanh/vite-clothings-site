@@ -3,19 +3,20 @@ import React, { FC } from "react";
 import { useIsMobile } from "src/hooks";
 
 import { Cart } from "src/containers";
+import { ProductCart } from "src/types";
 
 import { Wrapper } from "./styles";
 
 interface IProps {
-  noOfItems: number;
+  cart: ProductCart[];
 }
 
-const Header: FC<IProps> = ({ noOfItems }) => {
+const Header: FC<IProps> = ({ cart }) => {
   const isMobile = useIsMobile();
 
   return (
     <Wrapper isMobile={isMobile}>
-      <Cart noOfItems={noOfItems} />
+      <Cart cart={cart} />
     </Wrapper>
   );
 };

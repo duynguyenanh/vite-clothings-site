@@ -10,4 +10,5 @@ export const Wrapper = styled.div<{ isMobile?: boolean }>`
   justify-content: flex-end;
   padding: ${(props) => (props.isMobile ? "0 40px" : "0 8vw")};
   box-sizing: border-box;
+  position: fixed;
 `;

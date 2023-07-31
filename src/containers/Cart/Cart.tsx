@@ -3,7 +3,7 @@ import React, { FC, useMemo, useState, useCallback } from "react";
 import { Icon, MenuBox } from "src/components";
 import { useIsMobile } from "src/hooks";
 import { CartItem } from "src/containers";
-import { ICON_NAMES } from "src/types";
+import { ICON_NAMES, ProductCart } from "src/types";
 
 import {
   Wrapper,
@@ -13,20 +13,20 @@ import {
 } from "./styles";
 
 interface IProps {
-  noOfItems: number;
+  cart: ProductCart[];
 }
 
-const Cart: FC<IProps> = ({ noOfItems = 0 }) => {
+const Cart: FC<IProps> = ({ cart }) => {
   const [isActive, setIsActive] = useState(false);
   const isMobile = useIsMobile();
 
   const noOfItemText = useMemo(() => {
     return (
-      <CartTextWrapper isActive={isActive}>{`${
-        isMobile ? "" : "My Cart "
-      } ( ${noOfItems} )`}</CartTextWrapper>
+      <CartTextWrapper isActive={isActive}>{`${isMobile ? "" : "My Cart "} ( ${
+        cart.length
+      } )`}</CartTextWrapper>
     );
-  }, [noOfItems, isActive, isMobile]);
+  }, [cart.length, isActive, isMobile]);
 
   const CartIcon = useMemo(() => {
     return isMobile ? (
@@ -51,8 +51,9 @@ const Cart: FC<IProps> = ({ noOfItems = 0 }) => {
       </Wrapper>
       {isActive && (
         <MenuBox>
-          <CartItem />
-          <CartItem />
+          {cart.map((item) => (
+            <CartItem cartItem={item} key={item.size.id} />
+          ))}
         </MenuBox>
       )}
     </>

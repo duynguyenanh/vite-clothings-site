@@ -7,7 +7,7 @@ export const Wrapper = styled.div<{ isMobile: boolean }>((props) => ({
   display: "flex",
   border: `1px solid ${colors.borderLightGrey}`,
   width: props.isMobile ? "calc( 100% - 80px )" : "300px",
-  top: "44px",
+  top: "30px",
   boxSizing: "border-box",
   flexDirection: "column",
   gap: "30px",

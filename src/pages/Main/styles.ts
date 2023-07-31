@@ -24,6 +24,7 @@ export const ContentWrapper = styled.div<{ isMobile: boolean }>((props) => ({
   justifyContent: "center",
   gap: "1vw",
   boxSizing: "border-box",
+  marginTop: "20px",
 }));
 
 export const ProductImage = styled.img<{ isMobile: boolean }>((props) => ({
@@ -95,3 +96,9 @@ export const addButtonStyle = {
     color: "white",
   },
 };
+
+export const SelectedSizeSpan = styled.span({
+  fontSize: "12px",
+  color: colors.fontBold,
+  fontWeight: "bold",
+});
