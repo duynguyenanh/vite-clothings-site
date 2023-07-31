@@ -3,6 +3,8 @@ import React, { FC, useState } from "react";
 import { useIsMobile } from "src/hooks";
 
 import { Header } from "src/containers";
+import { Button } from "src/components";
+import { colors } from "src/res";
 
 import {
   Wrapper,
@@ -15,6 +17,9 @@ import {
   ProductDescription,
   ProductSize,
   Asterisk,
+  ButtonWrapper,
+  sizeButtonStyle,
+  addButtonStyle,
 } from "./styles";
 
 const Main: FC = () => {
@@ -44,6 +49,33 @@ const Main: FC = () => {
           <ProductSize>
             SIZE<Asterisk>*</Asterisk>
           </ProductSize>
+          <ButtonWrapper>
+            <Button
+              text="S"
+              buttonContainerStyle={sizeButtonStyle}
+              color={colors.fontNormal}
+              borderColor={colors.borderLightGrey}
+            />
+            <Button
+              text="M"
+              buttonContainerStyle={sizeButtonStyle}
+              color={colors.fontNormal}
+              borderColor={colors.borderLightGrey}
+            />
+            <Button
+              text="L"
+              buttonContainerStyle={sizeButtonStyle}
+              color={colors.fontNormal}
+              borderColor={colors.borderLightGrey}
+            />
+          </ButtonWrapper>
+          <Button
+            text="ADD TO CART"
+            color={colors.fontBold}
+            borderColor={colors.borderDarkGrey}
+            buttonContainerStyle={addButtonStyle}
+            withHover={true}
+          />
         </ProductContent>
       </ContentWrapper>
     </Wrapper>

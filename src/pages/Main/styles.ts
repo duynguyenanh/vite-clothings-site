@@ -69,8 +69,29 @@ export const ProductSize = styled.div({
   fontSize: "12px",
   color: colors.fontNormal,
   fontWeight: "bold",
+  marginBottom: "10px",
 });
 
 export const Asterisk = styled.span({
   color: colors.requiredStar,
 });
+
+export const ButtonWrapper = styled.div({
+  display: "flex",
+  gap: "4px",
+  marginBottom: "20px",
+});
+
+export const sizeButtonStyle = {
+  width: "40px",
+  height: "40px",
+};
+
+export const addButtonStyle = {
+  width: "140px",
+  fontWeight: "bold",
+  borderWidth: "2px",
+  "&:hover": {
+    color: "white",
+  },
+};
