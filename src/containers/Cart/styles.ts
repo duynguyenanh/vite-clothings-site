@@ -41,3 +41,8 @@ export const MenuWrapper = styled.div<{ isActive: boolean }>((props) => ({
   justifyContent: "center",
   alignItems: "center",
 }));
+
+export const Text = styled.div({
+  color: colors.fontNormal,
+  fontSize: "10px",
+});

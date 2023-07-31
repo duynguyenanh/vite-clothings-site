@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState, useCallback } from "react";
+import { FC, useMemo, useState, useCallback } from "react";
 
 import { Icon, MenuBox } from "src/components";
 import { useIsMobile } from "src/hooks";
@@ -10,6 +10,7 @@ import {
   CartTextWrapper,
   BottomCartCover,
   MenuWrapper,
+  Text,
 } from "./styles";
 
 interface IProps {
@@ -53,9 +54,11 @@ const Cart: FC<IProps> = ({ cart }) => {
       </Wrapper>
       {isActive && (
         <MenuBox>
-          {cart.map((item) => (
-            <CartItem cartItem={item} key={item.size.id} />
-          ))}
+          {!cart.length ? (
+            <Text>Cart Empty</Text>
+          ) : (
+            cart.map((item) => <CartItem cartItem={item} key={item.size.id} />)
+          )}
         </MenuBox>
       )}
     </>
