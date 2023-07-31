@@ -21,7 +21,8 @@ const CartItem: FC<IProps> = ({ cartItem }) => {
       <ContentWrapper>
         <NormalText>{cartItem.title}</NormalText>
         <NormalText>
-          {cartItem.quantity} x <BoldText>${cartItem.unitPrice}</BoldText>
+          {cartItem.quantity} x{" "}
+          <BoldText>${parseFloat(`${cartItem.unitPrice}`).toFixed(2)}</BoldText>
         </NormalText>
         <NormalText>Size:{cartItem.size.label}</NormalText>
       </ContentWrapper>

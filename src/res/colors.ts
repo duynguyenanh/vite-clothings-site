@@ -6,3 +6,4 @@ export const borderLightGrey = "#CCCCCC";
 export const borderDarkGrey = "#222222";
 export const white = "white";
 export const black = "black";
+export const error = "red";

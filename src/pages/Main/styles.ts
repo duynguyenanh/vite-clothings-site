@@ -102,3 +102,9 @@ export const SelectedSizeSpan = styled.span({
   color: colors.fontBold,
   fontWeight: "bold",
 });
+
+export const ErrorText = styled.div({
+  fontSize: "12px",
+  color: colors.error,
+  margin: "20px 0px",
+});

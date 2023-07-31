@@ -22,12 +22,16 @@ import {
   sizeButtonStyle,
   addButtonStyle,
   SelectedSizeSpan,
+  ErrorText,
 } from "./styles";
 
 const Main: FC = () => {
   const [product, setProduct] = useState<Product>();
   const [selectedSize, setSelectSize] = useState<Size>();
   const [cartItems, setCartItems] = useState<ProductCart[]>([]);
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const isMobile = useIsMobile();
 
@@ -42,7 +46,15 @@ const Main: FC = () => {
           throw response;
         }
       })
-      .then((data: Product) => setProduct(data));
+      .then((data: Product) => {
+        setError("");
+        setIsLoading(false);
+        setProduct(data);
+      })
+      .catch(() => {
+        setIsLoading(false);
+        setError("Can not load product");
+      });
   }, []);
 
   const productPrice = useMemo(() => {
@@ -52,6 +64,7 @@ const Main: FC = () => {
   const onAddProductCart = useCallback(() => {
     const clonedCart = [...cartItems];
     if (selectedSize && product) {
+      setError("");
       const existingCartItem = cartItems.find(
         (item) => item.size.id === selectedSize.id
       );
@@ -68,48 +81,57 @@ const Main: FC = () => {
           size: selectedSize,
         });
       }
+      setCartItems(clonedCart);
+    } else {
+      setError("Please select size");
     }
-    setCartItems(clonedCart);
   }, [cartItems, product, selectedSize]);
 
   return (
     <Wrapper>
-      <Header cart={cartItems} />
-      <ContentWrapper isMobile={isMobile}>
-        <ProductImage isMobile={isMobile} src={product?.imageURL} />
-        <ProductContent>
-          <ProductName>{product?.title}</ProductName>
-          {!isMobile && <Divider />}
-          <ProductPrice>${productPrice}</ProductPrice>
-          {!isMobile && <Divider />}
-          <ProductDescription>{product?.description}</ProductDescription>
-          <ProductSize>
-            SIZE<Asterisk>* </Asterisk>
-            <SelectedSizeSpan>{selectedSize?.label || ""}</SelectedSizeSpan>
-          </ProductSize>
-          <ButtonWrapper>
-            {product?.sizeOptions?.map((item) => (
+      {!isLoading ? (
+        <>
+          <Header cart={cartItems} />
+          <ContentWrapper isMobile={isMobile}>
+            <ProductImage isMobile={isMobile} src={product?.imageURL} />
+            <ProductContent>
+              <ProductName>{product?.title}</ProductName>
+              {!isMobile && <Divider />}
+              <ProductPrice>${productPrice}</ProductPrice>
+              {!isMobile && <Divider />}
+              <ProductDescription>{product?.description}</ProductDescription>
+              <ProductSize>
+                SIZE<Asterisk>* </Asterisk>
+                <SelectedSizeSpan>{selectedSize?.label || ""}</SelectedSizeSpan>
+              </ProductSize>
+              <ButtonWrapper>
+                {product?.sizeOptions?.map((item) => (
+                  <Button
+                    key={item.id}
+                    text={item.label}
+                    buttonContainerStyle={sizeButtonStyle}
+                    color={colors.fontNormal}
+                    borderColor={colors.borderLightGrey}
+                    onClick={() => setSelectSize(item)}
+                    isActive={item.id === selectedSize?.id}
+                  />
+                ))}
+              </ButtonWrapper>
               <Button
-                key={item.id}
-                text={item.label}
-                buttonContainerStyle={sizeButtonStyle}
-                color={colors.fontNormal}
-                borderColor={colors.borderLightGrey}
-                onClick={() => setSelectSize(item)}
-                isActive={item.id === selectedSize?.id}
+                text="ADD TO CART"
+                color={colors.fontBold}
+                borderColor={colors.borderDarkGrey}
+                buttonContainerStyle={addButtonStyle}
+                withHover={true}
+                onClick={onAddProductCart}
               />
-            ))}
-          </ButtonWrapper>
-          <Button
-            text="ADD TO CART"
-            color={colors.fontBold}
-            borderColor={colors.borderDarkGrey}
-            buttonContainerStyle={addButtonStyle}
-            withHover={true}
-            onClick={onAddProductCart}
-          />
-        </ProductContent>
-      </ContentWrapper>
+              <ErrorText>{error}</ErrorText>
+            </ProductContent>
+          </ContentWrapper>
+        </>
+      ) : (
+        <>...Loading</>
+      )}
     </Wrapper>
   );
 };
