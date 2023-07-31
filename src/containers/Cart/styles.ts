@@ -25,16 +25,17 @@ export const CartTextWrapper = styled.div<{ isActive?: boolean }>`
 `;
 
 export const BottomCartCover = styled.div({
-  height: "4px",
   background: colors.white,
   width: "100%",
   position: "relative",
-  top: "8px",
+  top: "-2px",
   zIndex: 9999,
+  padding: "2px",
+  boxSizing: "border-box",
 });
 
 export const MenuWrapper = styled.div<{ isActive: boolean }>((props) => ({
-  padding: "0 10px",
+  padding: "10px",
   marginBottom: props.isActive ? "-2px" : "0px",
   display: "flex",
   justifyContent: "center",

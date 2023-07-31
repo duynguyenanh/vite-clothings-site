@@ -5,3 +5,4 @@ export const requiredStar = "#C90000";
 export const borderLightGrey = "#CCCCCC";
 export const borderDarkGrey = "#222222";
 export const white = "white";
+export const black = "black";

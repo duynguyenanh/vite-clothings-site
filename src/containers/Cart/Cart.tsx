@@ -2,7 +2,7 @@ import React, { FC, useMemo, useState, useCallback } from "react";
 
 import { Icon, MenuBox } from "src/components";
 import { useIsMobile } from "src/hooks";
-
+import { CartItem } from "src/containers";
 import { ICON_NAMES } from "src/types";
 
 import {
@@ -49,7 +49,12 @@ const Cart: FC<IProps> = ({ noOfItems = 0 }) => {
         </MenuWrapper>
         {isActive && <BottomCartCover />}
       </Wrapper>
-      {isActive && <MenuBox />}
+      {isActive && (
+        <MenuBox>
+          <CartItem />
+          <CartItem />
+        </MenuBox>
+      )}
     </>
   );
 };
