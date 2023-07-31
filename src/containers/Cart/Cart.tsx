@@ -22,11 +22,13 @@ const Cart: FC<IProps> = ({ cart }) => {
 
   const noOfItemText = useMemo(() => {
     return (
-      <CartTextWrapper isActive={isActive}>{`${isMobile ? "" : "My Cart "} ( ${
-        cart.length
-      } )`}</CartTextWrapper>
+      <CartTextWrapper isActive={isActive}>{`${
+        isMobile ? "" : "My Cart "
+      } ( ${cart.reduce((acc, curr) => {
+        return acc + curr.quantity;
+      }, 0)} )`}</CartTextWrapper>
     );
-  }, [cart.length, isActive, isMobile]);
+  }, [cart, isActive, isMobile]);
 
   const CartIcon = useMemo(() => {
     return isMobile ? (
