@@ -6,6 +6,7 @@ import { Header } from "src/containers";
 import { Button } from "src/components";
 import { colors } from "src/res";
 import { Product, Size, ProductCart } from "src/types";
+import { mapCartItem } from "src/utils";
 
 import {
   Wrapper,
@@ -62,26 +63,9 @@ const Main: FC = () => {
   }, [product?.price]);
 
   const onAddProductCart = useCallback(() => {
-    const clonedCart = [...cartItems];
     if (selectedSize && product) {
       setError("");
-      const existingCartItem = cartItems.find(
-        (item) => item.size.id === selectedSize.id
-      );
-      if (existingCartItem) {
-        existingCartItem.quantity++;
-      } else {
-        clonedCart.push({
-          id: product.id,
-          title: product.title,
-          description: product.description,
-          unitPrice: product.price,
-          quantity: 1,
-          imageURL: product.imageURL,
-          size: selectedSize,
-        });
-      }
-      setCartItems(clonedCart);
+      setCartItems(mapCartItem(selectedSize, product, cartItems));
     } else {
       setError("Please select size");
     }

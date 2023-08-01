@@ -26,4 +26,5 @@ export const Wrapper = styled.div<{
       transition: `background-color 0.2s ease`,
     },
   }),
+  userSelect: "none",
 }));
